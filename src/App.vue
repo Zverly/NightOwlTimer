@@ -21,6 +21,7 @@ const custom = ref('');
 const activeUntil = ref<Date | null>(null);
 const pending = ref(false);
 const toast = ref('');
+const appVersion = __APP_VERSION__;
 const history = ref<Array<{ time: string; action: string; detail: string }>>([]);
 const historyRefreshing = ref(false);
 const settings = ref<Settings>({
@@ -521,7 +522,7 @@ watch(
       </section>
     </section>
     <footer>
-      <span><i></i>Windows 计划任务已连接</span><span>v0.1.0 · 本地运行</span>
+      <span><i></i>Windows 计划任务已连接</span><span>v{{ appVersion }} · 本地运行</span>
     </footer>
     <div v-if="toast" class="toast" role="status">{{ toast }}</div>
   </main>

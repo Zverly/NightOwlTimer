@@ -1,6 +1,6 @@
 [package]
 name = "nightowl-timer"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "A lightweight Windows shutdown, sleep, and scheduling utility built with Tauri."
 license = "MIT"

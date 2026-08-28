@@ -1,9 +1,21 @@
 {
   "name": "nightowl-timer",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A lightweight Windows shutdown, sleep, and scheduling utility built with Tauri.",
+  "author": "Zverly",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zverly/NightOwlTimer.git"
+  },
+  "homepage": "https://github.com/Zverly/NightOwlTimer#readme",
+  "bugs": {
+    "url": "https://github.com/Zverly/NightOwlTimer/issues"
+  },
+  "engines": {
+    "node": ">=20.19"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",

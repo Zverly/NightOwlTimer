@@ -9,6 +9,10 @@
 
 </div>
 
+## 界面预览
+
+![NightOwl Timer 主界面](docs/images/nightowl-main.png)
+
 ## 下载
 
 前往 [Releases](https://github.com/Zverly/NightOwlTimer/releases/latest) 下载最新的
