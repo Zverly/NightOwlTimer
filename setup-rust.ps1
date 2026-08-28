@@ -1,5 +1,7 @@
 param(
-    [string]$ToolchainRoot = 'E:\NightOwlDev'
+    [Parameter(Mandatory = $true)]
+    [ValidateNotNullOrEmpty()]
+    [string]$ToolchainRoot
 )
 
 $ErrorActionPreference = 'Stop'

@@ -41,8 +41,8 @@ NightOwl 不需要账户，不收集遥测，也不会上传任务或操作记�
 %APPDATA%\NightOwl Timer\nightowl-data.json
 ```
 
-从旧版升级时，程序会在新位置没有数据的前提下，自动迁移
-`E:\NightOwl\data\nightowl-data.json`。详细说明见 [PRIVACY.md](PRIVACY.md)。
+从旧版升级时，程序会在新位置没有数据的前提下自动迁移兼容数据。详细说明见
+[PRIVACY.md](PRIVACY.md)。
 
 ## 开发环境
 
@@ -66,14 +66,13 @@ cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings
 cargo test --manifest-path src-tauri/Cargo.toml
 ```
 
-## E 盘工具链
+## 可选：自定义 Rust 工具链目录
 
-如需避免将 Rust 工具链安装到系统盘，可运行：
+如需将 Rust 工具链安装到自定义目录，可运行：
 
 ```powershell
-.\setup-rust.ps1
-$env:RUSTUP_HOME = 'E:\NightOwlDev\rustup'
-$env:CARGO_HOME = 'E:\NightOwlDev\cargo'
+$toolchainRoot = Read-Host '请输入 Rust 工具链目录'
+.\setup-rust.ps1 -ToolchainRoot $toolchainRoot
 $env:PATH = "$env:CARGO_HOME\bin;$env:PATH"
 ```
 
