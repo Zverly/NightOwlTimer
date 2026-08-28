@@ -1,0 +1,10 @@
+node_modules/
+.npm-cache/
+dist/
+target/
+src-tauri/target/
+audit-target/
+cargo/
+rustup/
+src-tauri/gen/
+src-tauri/Cargo.lock
