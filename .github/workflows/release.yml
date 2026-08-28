@@ -30,6 +30,10 @@ jobs:
         run: |
           $installer = Get-ChildItem "src-tauri/target/release/bundle/nsis/*-setup.exe" | Select-Object -First 1
           if (-not $installer) { throw "NSIS installer was not generated" }
+          $releaseName = $installer.Name.Replace(' ', '.')
+          if ($releaseName -ne $installer.Name) {
+            $installer = Rename-Item -LiteralPath $installer.FullName -NewName $releaseName -PassThru
+          }
           $hash = (Get-FileHash -Algorithm SHA256 $installer.FullName).Hash.ToLowerInvariant()
           "$hash  $($installer.Name)" | Set-Content -Encoding ascii SHA256SUMS.txt
 
