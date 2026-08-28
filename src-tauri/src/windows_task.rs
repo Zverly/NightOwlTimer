@@ -100,18 +100,25 @@ mod tests {
 
     #[test]
     fn task_xml_uses_an_iso_time_trigger_and_separate_arguments() {
+        let target_time = DateTime::parse_from_rfc3339("2026-08-29T15:05:00+08:00")
+            .expect("test datetime should parse");
         let schedule = ScheduleInfo {
             id: "nightowl-123".into(),
             action: Action::Sleep,
-            target_time: DateTime::parse_from_rfc3339("2026-08-29T15:05:00+08:00")
-                .expect("test datetime should parse")
-                .to_utc(),
+            target_time: target_time.to_utc(),
             target_time_local: "2026-08-29 15:05:00".into(),
         };
 
         let xml = task_xml(&schedule, Path::new("E:/NightOwl/nightowl-timer.exe"));
+        let boundary = xml
+            .split_once("<StartBoundary>")
+            .and_then(|(_, rest)| rest.split_once("</StartBoundary>"))
+            .map(|(value, _)| value)
+            .expect("task XML should contain a start boundary");
+        let parsed_boundary = DateTime::parse_from_rfc3339(boundary)
+            .expect("start boundary should use ISO 8601 format");
 
-        assert!(xml.contains("<StartBoundary>2026-08-29T15:05:00+08:00</StartBoundary>"));
+        assert_eq!(parsed_boundary.to_utc(), target_time.to_utc());
         assert!(xml.contains("<Command>E:/NightOwl/nightowl-timer.exe</Command>"));
         assert!(xml.contains("<Arguments>--worker nightowl-123 sleep</Arguments>"));
     }
