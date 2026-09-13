@@ -470,6 +470,7 @@ pub fn run() {
                 .arg("--autostart")
                 .build(),
         )
+        .plugin(tauri_plugin_opener::init())
         .setup(move |app| {
             use tauri::menu::{Menu, MenuItem, Submenu};
             use tauri::tray::TrayIconBuilder;
