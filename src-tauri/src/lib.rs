@@ -115,7 +115,12 @@ fn open_repository() -> Result<(), String> {
 
 #[tauri::command]
 fn open_data_file() -> Result<(), String> {
-    open::that(storage::data_file_path()).map_err(|error| error.to_string())
+    let path = storage::data_file_path();
+    std::process::Command::new("explorer.exe")
+        .arg(format!("/select,{}", path.display()))
+        .spawn()
+        .map(|_| ())
+        .map_err(|error| error.to_string())
 }
 
 struct AppState(Mutex<Option<ScheduleInfo>>);
