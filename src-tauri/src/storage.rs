@@ -47,7 +47,10 @@ pub fn data_file_path() -> PathBuf {
 fn load_data() -> Result<AppData, String> {
     let file = data_file()?;
     if !file.exists() {
-        return Ok(AppData::default());
+        let data = AppData::default();
+        let text = serde_json::to_string_pretty(&data).map_err(|error| error.to_string())?;
+        fs::write(&file, text).map_err(|error| error.to_string())?;
+        return Ok(data);
     }
     let text = fs::read_to_string(file).map_err(|error| error.to_string())?;
     serde_json::from_str(&text).map_err(|error| error.to_string())
