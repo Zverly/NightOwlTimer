@@ -13,7 +13,7 @@ $graphics.FillRectangle($panel, 260, 82, 760, 650)
 $graphics.DrawRectangle($border, 260, 82, 760, 650)
 $fontTitle = [Drawing.Font]::new('Microsoft YaHei UI', 30, [Drawing.FontStyle]::Bold)
 $fontBody = [Drawing.Font]::new('Microsoft YaHei UI', 14)
-$fontSmall = [Drawing.Font]::new('Microsoft YaHei UI', 12)
+$fontSmall = [Drawing.Font]::new('Microsoft YaHei UI', 10)
 $fontStrong = [Drawing.Font]::new('Microsoft YaHei UI', 15, [Drawing.FontStyle]::Bold)
 $muted = [Drawing.SolidBrush]::new([Drawing.Color]::FromArgb(156, 168, 208))
 $text = [Drawing.SolidBrush]::new([Drawing.Color]::FromArgb(244, 245, 255))
@@ -30,7 +30,7 @@ $rows = @(@('版本', 'v1.0.1', $true), @('运行平台', 'windows', $true), @('
 $y = 342
 foreach ($row in $rows) {
   $graphics.DrawString($row[0], $fontBody, $muted, 316, $y)
-  $graphics.DrawString($row[1], $row[2] ? $fontStrong : $fontSmall, $row[2] ? $text : $accent, 690, $y)
+  $graphics.DrawString($row[1], $row[2] ? $fontStrong : $fontSmall, $row[2] ? $text : $accent, 620, $y)
   if ($y -lt 606) { $graphics.DrawLine([Drawing.Pen]::new([Drawing.Color]::FromArgb(48, 59, 103), 1), 316, $y + 38, 958, $y + 38) }
   $y += 64
 }
