@@ -108,6 +108,24 @@ fn exit_application(app: tauri::AppHandle) {
     app.exit(0);
 }
 
+#[tauri::command]
+fn open_repository() -> Result<(), String> {
+    std::process::Command::new("cmd")
+        .args(["/C", "start", "", "https://github.com/Zverly/NightOwlTimer"])
+        .spawn()
+        .map(|_| ())
+        .map_err(|error| error.to_string())
+}
+
+#[tauri::command]
+fn open_data_file() -> Result<(), String> {
+    std::process::Command::new("explorer.exe")
+        .arg(storage::data_file_path())
+        .spawn()
+        .map(|_| ())
+        .map_err(|error| error.to_string())
+}
+
 struct AppState(Mutex<Option<ScheduleInfo>>);
 
 #[derive(Clone, Serialize)]
@@ -668,7 +686,9 @@ pub fn run() {
             get_diagnostics,
             minimize_window,
             hide_window,
-            exit_application
+            exit_application,
+            open_repository,
+            open_data_file
         ])
         .run(tauri::generate_context!())
         .expect("error while running NightOwl");

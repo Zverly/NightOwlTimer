@@ -263,7 +263,7 @@ async function openRepository() {
   if (repositoryOpening.value) return;
   repositoryOpening.value = true;
   try {
-    await openUrl(repositoryUrl);
+    await invoke('open_repository');
   } catch (error) {
     const fallback = window.open(repositoryUrl, '_blank', 'noopener,noreferrer');
     if (!fallback) notify(`打开仓库失败：${String(error)}`, 'error');
@@ -279,7 +279,7 @@ async function startWindowDrag(event: PointerEvent) {
 }
 async function openDataFile() {
   try {
-    await openPath(diagnostics.value.data_file);
+    await invoke('open_data_file');
   } catch (error) {
     notify(`打开数据文件失败：${String(error)}`, 'error');
   }

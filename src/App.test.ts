@@ -92,10 +92,10 @@ describe('App', () => {
     expect(repository.text()).toBe('https://github.com/Zverly/NightOwlTimer');
     await repository.trigger('click');
     await flushPromises();
-    expect(openUrlMock).toHaveBeenCalledWith('https://github.com/Zverly/NightOwlTimer');
+    expect(invokeMock).toHaveBeenCalledWith('open_repository');
     await wrapper.get('.local-data-detail a').trigger('click');
     await flushPromises();
-    expect(openPathMock).toHaveBeenCalledWith('E:/data/nightowl-data.json');
+    expect(invokeMock).toHaveBeenCalledWith('open_data_file');
   });
 
   it('checks GitHub for the latest release', async () => {
