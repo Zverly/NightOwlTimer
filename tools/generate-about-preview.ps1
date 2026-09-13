@@ -26,7 +26,7 @@ $graphics.DrawImage($icon, 616, 146, 48, 48)
 $icon.Dispose()
 $graphics.DrawString('NightOwl Timer', $fontTitle, $text, 438, 245)
 $graphics.DrawString('陪你把电脑安静地交给夜晚。', $fontBody, $muted, 505, 298)
-$rows = @(@('版本', 'v1.0.1', $true), @('运行平台', 'Windows x64', $true), @('代码仓库', 'github.com/Zverly/NightOwlTimer  ↗', $false), @('开源协议', 'MIT License · © 2026 Zverly', $true), @('本地数据', '打开应用目录下的 data 文件夹  ↗', $false))
+$rows = @(@('版本', 'v1.0.1', $true), @('运行平台', 'windows', $true), @('代码仓库', 'https://github.com/Zverly/NightOwlTimer  ↗', $false), @('开源协议', 'MIT License · © 2026 Zverly', $true), @('本地数据', '5 条历史记录 · 应用目录\\data\\nightowl-data.json  ↗', $false))
 $y = 342
 foreach ($row in $rows) {
   $graphics.DrawString($row[0], $fontBody, $muted, 316, $y)

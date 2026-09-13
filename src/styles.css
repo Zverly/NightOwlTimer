@@ -711,14 +711,14 @@ input:disabled {
   border: 0;
   border-radius: 9px;
   padding: 10px 16px;
-  background: #d88663;
-  color: #fff7f2;
+  background: var(--primary-strong);
+  color: var(--text);
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
 }
 .update-button:hover:not(:disabled) {
-  background: #e19672;
+  background: var(--primary);
 }
 .update-button:disabled {
   cursor: wait;
@@ -729,7 +729,7 @@ input:disabled {
   align-items: center;
   gap: 5px;
   margin-left: auto;
-  color: #e49470;
+  color: #aeb5ff;
   font-size: 12px;
   text-align: right;
 }
