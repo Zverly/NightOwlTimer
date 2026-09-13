@@ -38,7 +38,7 @@ jobs:
           }
           $lines | Set-Content -Encoding ascii SHA256SUMS.txt
 
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         with:
           generate_release_notes: true
           body_path: CHANGELOG.md
