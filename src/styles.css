@@ -616,6 +616,22 @@ footer i {
   box-shadow: 0 10px 30px #0008;
   font-size: 11px;
 }
+.toast[data-tone='success'] {
+  border-color: color-mix(in srgb, var(--success) 72%, var(--border));
+  background: color-mix(in srgb, var(--success) 18%, var(--surface-raised));
+}
+.toast[data-tone='warning'] {
+  border-color: color-mix(in srgb, var(--warning) 72%, var(--border));
+  background: color-mix(in srgb, var(--warning) 18%, var(--surface-raised));
+}
+.toast[data-tone='error'] {
+  border-color: color-mix(in srgb, var(--danger) 72%, var(--border));
+  background: color-mix(in srgb, var(--danger) 18%, var(--surface-raised));
+}
+.toast[data-tone='info'] {
+  border-color: color-mix(in srgb, var(--primary) 72%, var(--border));
+  background: color-mix(in srgb, var(--primary) 18%, var(--surface-raised));
+}
 @media (max-height: 780px) {
   .shell {
     height: 100vh;
