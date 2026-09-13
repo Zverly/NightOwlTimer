@@ -97,6 +97,24 @@ describe('App', () => {
     );
   });
 
+  it('checks GitHub for the latest release', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => ({ ok: true, status: 200, json: async () => ({ tag_name: 'v0.1.1' }) })),
+    );
+    const wrapper = await mountApp();
+    await wrapper.findAll('button.page-entry')[1].trigger('click');
+    await wrapper.get('button.about-entry').trigger('click');
+    await wrapper.get('.update-button').trigger('click');
+    await flushPromises();
+    expect(fetch).toHaveBeenCalledWith(
+      'https://api.github.com/repos/Zverly/NightOwlTimer/releases/latest',
+      expect.objectContaining({ headers: expect.any(Object) }),
+    );
+    expect(wrapper.get('.toast').text()).toContain('当前已是最新版本');
+    vi.unstubAllGlobals();
+  });
+
   it('disables the create button while scheduling is pending', async () => {
     let resolveSchedule!: (value: { target_time: string }) => void;
     const schedulePromise = new Promise<{ target_time: string }>((resolve) => {

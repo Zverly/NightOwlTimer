@@ -44,6 +44,7 @@ const history = ref<Array<{ time: string; action: string; detail: string }>>([])
 const historyRefreshing = ref(false);
 const repositoryOpening = ref(false);
 const repositoryCopying = ref(false);
+const updateChecking = ref(false);
 const settings = ref<Settings>({
   reminders: { ten: true, one: true, thirty: true },
   startup: false,
@@ -287,6 +288,36 @@ async function copyRepositoryUrl() {
     notify(`复制仓库地址失败：${String(error)}`, 'error');
   } finally {
     repositoryCopying.value = false;
+  }
+}
+async function checkForUpdate() {
+  if (updateChecking.value) return;
+  updateChecking.value = true;
+  try {
+    const response = await fetch(
+      'https://api.github.com/repos/Zverly/NightOwlTimer/releases/latest',
+      {
+        headers: { Accept: 'application/vnd.github+json' },
+      },
+    );
+    if (response.status === 404) {
+      notify('仓库暂无已发布版本', 'info');
+      return;
+    }
+    if (!response.ok) throw new Error(`GitHub API ${response.status}`);
+    const release = (await response.json()) as { tag_name?: string; html_url?: string };
+    const latest = (release.tag_name ?? '').replace(/^v/i, '');
+    const current = String(appVersion).replace(/^v/i, '');
+    if (latest && latest !== current) {
+      notify(`发现新版本 v${latest}`, 'success');
+      if (release.html_url) await openUrl(release.html_url);
+    } else {
+      notify('当前已是最新版本', 'success');
+    }
+  } catch (error) {
+    notify(`检查更新失败：${String(error)}`, 'error');
+  } finally {
+    updateChecking.value = false;
   }
 }
 function formatDate(date: Date) {
@@ -582,19 +613,6 @@ watch(
           <ArrowLeft :size="16" aria-hidden="true" /><span>返回设置</span>
         </button>
         <section class="about-layout">
-          <aside class="about-nav" aria-label="关于页面导航">
-            <div class="about-nav-brand">
-              <span class="brand-mark"></span><strong>NightOwl</strong>
-            </div>
-            <div class="about-nav-status">
-              <i></i><span>NightOwl Timer</span><small>运行正常</small>
-            </div>
-            <div class="about-nav-items">
-              <span><Settings :size="17" aria-hidden="true" />通用</span>
-              <span><Clock3 :size="17" aria-hidden="true" />定时任务</span>
-              <span class="active"><AlertTriangle :size="17" aria-hidden="true" />关于</span>
-            </div>
-          </aside>
           <section class="panel about-panel">
             <div class="about-hero">
               <div class="about-mark"><img src="/nightowl-icon.png" alt="NightOwl 应用图标" /></div>
@@ -603,7 +621,18 @@ watch(
             </div>
             <div class="about-details">
               <div class="about-detail">
-                <span>版本</span><strong>v{{ diagnostics.version }}</strong>
+                <span>版本</span>
+                <div class="version-value">
+                  <strong>v{{ diagnostics.version }}</strong>
+                  <button
+                    type="button"
+                    class="update-button"
+                    :disabled="updateChecking"
+                    @click="checkForUpdate"
+                  >
+                    {{ updateChecking ? '检查中…' : '检查更新' }}
+                  </button>
+                </div>
               </div>
               <div class="about-detail">
                 <span>运行平台</span><strong>{{ diagnostics.platform }}</strong>

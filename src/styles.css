@@ -589,11 +589,9 @@ input:disabled {
   box-shadow: 0 0 20px #9488ed66;
 }
 .about-layout {
-  display: grid;
-  grid-template-columns: 190px minmax(0, 1fr);
+  display: block;
   height: calc(100% - 34px);
   min-height: 0;
-  gap: 14px;
 }
 .about-nav {
   padding: 18px 12px;
@@ -699,6 +697,32 @@ input:disabled {
   font-size: 12px;
   font-weight: 500;
   text-align: right;
+}
+.version-value {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+}
+.version-value strong {
+  margin: 0;
+}
+.update-button {
+  border: 0;
+  border-radius: 9px;
+  padding: 10px 16px;
+  background: #d88663;
+  color: #fff7f2;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.update-button:hover:not(:disabled) {
+  background: #e19672;
+}
+.update-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
 }
 .about-detail a {
   display: inline-flex;
