@@ -23,19 +23,21 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
 
       - run: npm ci
-      - run: npm run tauri build -- --bundles nsis
+      - run: npm run tauri build -- --bundles nsis,msi
 
       - name: Generate SHA-256 checksums
         shell: pwsh
         run: |
-          $installer = Get-ChildItem "src-tauri/target/release/bundle/nsis/*-setup.exe" | Select-Object -First 1
-          if (-not $installer) { throw "NSIS installer was not generated" }
-          $releaseName = $installer.Name.Replace(' ', '.')
-          if ($releaseName -ne $installer.Name) {
-            $installer = Rename-Item -LiteralPath $installer.FullName -NewName $releaseName -PassThru
+          $installers = @(
+            Get-ChildItem "src-tauri/target/release/bundle/nsis/*-setup.exe",
+            Get-ChildItem "src-tauri/target/release/bundle/msi/*.msi"
+          ) | Where-Object { $_ }
+          if ($installers.Count -ne 2) { throw "Both NSIS and MSI installers are required" }
+          $lines = $installers | ForEach-Object {
+            $hash = (Get-FileHash -Algorithm SHA256 $_.FullName).Hash.ToLowerInvariant()
+            "$hash  $($_.Name)"
           }
-          $hash = (Get-FileHash -Algorithm SHA256 $installer.FullName).Hash.ToLowerInvariant()
-          "$hash  $($installer.Name)" | Set-Content -Encoding ascii SHA256SUMS.txt
+          $lines | Set-Content -Encoding ascii SHA256SUMS.txt
 
       - uses: softprops/action-gh-release@v2
         with:
@@ -43,4 +45,5 @@ jobs:
           body_path: CHANGELOG.md
           files: |
             src-tauri/target/release/bundle/nsis/*-setup.exe
+            src-tauri/target/release/bundle/msi/*.msi
             SHA256SUMS.txt

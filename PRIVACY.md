@@ -2,7 +2,7 @@
 
 NightOwl Timer 是本地运行的桌面工具，不需要账户，也不包含遥测、广告或分析服务。
 
-以下内容仅保存在当前 Windows 用户的应用数据目录中：
+以下内容仅保存在应用程序同目录的 `data` 文件夹中：
 
 - 当前定时计划
 - 任务历史
@@ -11,4 +11,4 @@ NightOwl Timer 是本地运行的桌面工具，不需要账户，也不包含�
 
 NightOwl 不会主动将这些数据传输到网络。Windows 计划任务仅用于在指定时间调用本机安装的
 NightOwl 可执行文件。卸载程序不会自动删除用户数据，用户可自行删除
-`%APPDATA%\NightOwl Timer`。
+应用目录下的 `data\nightowl-data.json` 文件。

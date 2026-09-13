@@ -16,7 +16,7 @@
 ## 下载
 
 前往 [Releases](https://github.com/Zverly/NightOwlTimer/releases/latest) 下载最新的
-`x64-setup.exe` 安装包。NightOwl 支持 Windows 10 和 Windows 11 x64。
+`x64-setup.exe` 或 `.msi` 安装包。NightOwl 支持 Windows 10 和 Windows 11 x64。
 
 > 当前安装包尚未购买代码签名证书。首次运行时 Windows SmartScreen 可能显示未知发布者提示，
 > 可使用同一 Release 中的 `SHA256SUMS.txt` 校验安装包完整性。
@@ -35,10 +35,10 @@
 
 ## 数据与隐私
 
-NightOwl 不需要账户，不收集遥测，也不会上传任务或操作记录。应用数据默认保存在：
+NightOwl 不需要账户，不收集遥测，也不会上传任务或操作记录。应用数据默认保存在应用目录下的 `data` 文件夹：
 
 ```text
-%APPDATA%\NightOwl Timer\nightowl-data.json
+data\nightowl-data.json
 ```
 
 从旧版升级时，程序会在新位置没有数据的前提下自动迁移兼容数据。详细说明见
@@ -82,7 +82,13 @@ $env:PATH = "$env:CARGO_HOME\bin;$env:PATH"
 npm run tauri build -- --bundles nsis
 ```
 
-安装包生成在 `src-tauri\target\release\bundle\nsis`。推送 `v*` 标签后，
+安装包生成在 `src-tauri\target\release\bundle\nsis`。同时构建 NSIS 与 MSI 可运行：
+
+```powershell
+npm run tauri build -- --bundles nsis,msi
+```
+
+推送 `v*` 标签后，
 GitHub Actions 会自动构建 Windows 安装包、生成 SHA-256 校验文件并创建 Release。
 
 ## 项目结构
