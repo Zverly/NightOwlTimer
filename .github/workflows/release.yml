@@ -28,10 +28,9 @@ jobs:
       - name: Generate SHA-256 checksums
         shell: pwsh
         run: |
-          $installers = @(
-            Get-ChildItem -Path "src-tauri/target/release/bundle/nsis" -Filter "*-setup.exe",
-            Get-ChildItem -Path "src-tauri/target/release/bundle/msi" -Filter "*.msi"
-          ) | Where-Object { $_ -and -not $_.PSIsContainer }
+          $nsisInstaller = Get-ChildItem -Path "src-tauri/target/release/bundle/nsis" -Filter "*-setup.exe"
+          $msiInstaller = Get-ChildItem -Path "src-tauri/target/release/bundle/msi" -Filter "*.msi"
+          $installers = @($nsisInstaller) + @($msiInstaller) | Where-Object { $_ -and -not $_.PSIsContainer }
           if ($installers.Count -ne 2) { throw "Both NSIS and MSI installers are required" }
           $lines = $installers | ForEach-Object {
             $hash = (Get-FileHash -Algorithm SHA256 $_.FullName).Hash.ToLowerInvariant()
