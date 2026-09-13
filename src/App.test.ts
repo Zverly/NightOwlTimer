@@ -101,7 +101,7 @@ describe('App', () => {
   it('checks GitHub for the latest release', async () => {
     vi.stubGlobal(
       'fetch',
-      vi.fn(async () => ({ ok: true, status: 200, json: async () => ({ tag_name: 'v0.1.1' }) })),
+      vi.fn(async () => ({ ok: true, status: 200, json: async () => ({ tag_name: 'v1.0.0' }) })),
     );
     const wrapper = await mountApp();
     await wrapper.findAll('button.page-entry')[1].trigger('click');

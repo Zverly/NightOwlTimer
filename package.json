@@ -1,7 +1,7 @@
 {
   "name": "nightowl-timer",
   "private": true,
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "A lightweight Windows shutdown, sleep, and scheduling utility built with Tauri.",
   "author": "Zverly",
   "license": "MIT",
