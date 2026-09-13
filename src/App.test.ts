@@ -28,7 +28,7 @@ function defaultInvoke(command: string) {
   if (command === 'get_active_schedule') return Promise.resolve(null);
   if (command === 'get_diagnostics')
     return Promise.resolve({
-      version: '0.1.1',
+      version: '1.0.1',
       platform: 'Windows',
       history_count: 0,
       data_directory: 'E:/data',
@@ -101,7 +101,7 @@ describe('App', () => {
   it('checks GitHub for the latest release', async () => {
     vi.stubGlobal(
       'fetch',
-      vi.fn(async () => ({ ok: true, status: 200, json: async () => ({ tag_name: 'v1.0.0' }) })),
+      vi.fn(async () => ({ ok: true, status: 200, json: async () => ({ tag_name: 'v1.0.1' }) })),
     );
     const wrapper = await mountApp();
     await wrapper.findAll('button.page-entry')[1].trigger('click');

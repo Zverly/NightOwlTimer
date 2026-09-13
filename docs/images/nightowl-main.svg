@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="820" viewBox="0 0 1280 820" role="img" aria-labelledby="title desc">
+  <title id="title">NightOwl Timer 主界面预览</title>
+  <desc id="desc">深色主题的 NightOwl Timer 主界面，包含动作选择、时间预设和创建计划。</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0e1428"/><stop offset="1" stop-color="#202b5d"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a798ff"/><stop offset="1" stop-color="#6f68e8"/></linearGradient>
+  </defs>
+  <rect width="1280" height="820" rx="28" fill="url(#bg)"/>
+  <g font-family="Segoe UI, Microsoft YaHei, sans-serif" fill="#f4f5ff">
+    <circle cx="74" cy="62" r="24" fill="#272d56"/><path d="M74 44a18 18 0 1 0 12 31l-5-7a10 10 0 1 1 2-15z" fill="#c9b8ff"/>
+    <text x="112" y="62" font-size="24" font-weight="700">NightOwl</text><text x="112" y="84" font-size="13" fill="#a9b4df">轻量定时助手</text>
+    <rect x="1110" y="36" width="54" height="36" rx="10" fill="#171e3b"/><text x="1127" y="60" font-size="20">−</text>
+    <rect x="1174" y="36" width="54" height="36" rx="10" fill="#171e3b"/><text x="1192" y="60" font-size="18">×</text>
+    <rect x="1050" y="100" width="86" height="42" rx="12" fill="#202852"/><text x="1072" y="127" font-size="14">任务历史</text>
+    <rect x="1146" y="100" width="72" height="42" rx="12" fill="#202852"/><text x="1167" y="127" font-size="14">设置</text>
+    <text x="78" y="168" font-size="14" letter-spacing="3" fill="#8c9cff">GOOD NIGHT, COMPUTER</text>
+    <text x="78" y="222" font-size="38" font-weight="700">让电脑在你需要的时刻</text><text x="78" y="270" font-size="38" font-weight="700" fill="#b7aaff">安静下来。</text>
+    <text x="78" y="302" font-size="15" fill="#a9b4df">选择动作和时间，NightOwl 会在后台可靠执行。</text>
+    <rect x="54" y="322" width="1172" height="210" rx="20" fill="#171e37" stroke="#3a4777"/>
+    <text x="78" y="358" font-size="17" font-weight="700">执行动作</text><text x="78" y="384" font-size="13" fill="#9ca8d0">选择一种方式</text>
+    <g stroke="#3b4774" fill="#10172c">
+      <rect x="78" y="406" width="348" height="96" rx="15" stroke="#8c88ff" stroke-width="2" fill="#252c5f"/><rect x="446" y="406" width="348" height="96" rx="15"/><rect x="814" y="406" width="348" height="96" rx="15"/>
+    </g>
+    <g font-size="16"><text x="100" y="442" fill="#a99cff">◯</text><text x="100" y="472" font-weight="700">正常关机</text><text x="100" y="494" font-size="13" fill="#9ca8d0">保存工作后安全关闭电脑</text><text x="360" y="481" font-size="12" fill="#fff">已选择</text>
+      <text x="468" y="442" fill="#ff7181">△</text><text x="468" y="472" font-weight="700">强制关机</text><text x="468" y="494" font-size="13" fill="#9ca8d0">立即终止应用并关闭电脑</text>
+      <text x="836" y="442" fill="#cfb1ff">☾</text><text x="836" y="472" font-weight="700">睡眠</text><text x="836" y="494" font-size="13" fill="#9ca8d0">进入低功耗睡眠状态</text></g>
+    <rect x="54" y="556" width="1172" height="190" rx="20" fill="#171e37" stroke="#3a4777"/>
+    <text x="78" y="593" font-size="17" font-weight="700">设置时间</text><text x="78" y="619" font-size="13" fill="#9ca8d0">选择倒计时，或精确指定执行时刻</text>
+    <g font-size="18" text-anchor="middle"><rect x="78" y="643" width="254" height="64" rx="12" fill="#10172c" stroke="#3b4774"/><text x="205" y="671">30</text><text x="205" y="694" font-size="12" fill="#9ca8d0">分钟</text><rect x="348" y="643" width="254" height="64" rx="12" fill="#30356d" stroke="#8c88ff"/><text x="475" y="671">60</text><text x="475" y="694" font-size="12" fill="#c5c8e8">分钟</text><rect x="618" y="643" width="254" height="64" rx="12" fill="#10172c" stroke="#3b4774"/><text x="745" y="671">90</text><text x="745" y="694" font-size="12" fill="#9ca8d0">分钟</text><rect x="888" y="643" width="254" height="64" rx="12" fill="#10172c" stroke="#3b4774"/><text x="1015" y="671">120</text><text x="1015" y="694" font-size="12" fill="#9ca8d0">分钟</text></g>
+    <text x="78" y="785" font-size="13" fill="#8d9ad0">● Windows 计划任务已连接</text><text x="1125" y="785" font-size="13" fill="#8d9ad0">v1.0.1 · 本地运行</text>
+  </g>
+</svg>

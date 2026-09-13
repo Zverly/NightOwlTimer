@@ -11,12 +11,20 @@
 
 ## 界面预览
 
-![NightOwl Timer 主界面](docs/images/nightowl-main.png)
+主界面提供关机、强制关机和睡眠三种动作，并支持快捷倒计时和精确时间：
+
+![NightOwl Timer 主界面](docs/images/nightowl-main.svg)
+
+关于页面集中展示版本、运行平台、GitHub 仓库和本地数据入口：
+
+![NightOwl Timer 关于页面](docs/images/nightowl-about.svg)
 
 ## 下载
 
 前往 [Releases](https://github.com/Zverly/NightOwlTimer/releases/latest) 下载最新的
 `x64-setup.exe` 或 `.msi` 安装包。NightOwl 支持 Windows 10 和 Windows 11 x64。
+
+安装包说明、升级流程和校验步骤见 [安装与发布说明](docs/INSTALLATION.md)。
 
 > 当前安装包尚未购买代码签名证书。首次运行时 Windows SmartScreen 可能显示未知发布者提示，
 > 可使用同一 Release 中的 `SHA256SUMS.txt` 校验安装包完整性。
@@ -32,6 +40,7 @@
 - 任务历史、操作状态和诊断信息
 - 单实例运行，再次启动时激活现有窗口
 - 开机自启动、静默启动和关闭时隐藏到托盘
+- 关于页面一键打开 GitHub 仓库、打开本地数据目录并检查新版本
 
 ## 数据与隐私
 
@@ -43,6 +52,9 @@ data\nightowl-data.json
 
 从旧版升级时，程序会在新位置没有数据的前提下自动迁移兼容数据。详细说明见
 [PRIVACY.md](PRIVACY.md)。
+
+关于页面中的“本地数据”会直接打开应用目录下的 `data` 文件夹，不依赖系统的 JSON
+文件关联程序；“代码仓库”会使用系统默认浏览器打开 GitHub。
 
 ## 开发环境
 

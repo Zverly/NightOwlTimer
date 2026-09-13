@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="820" viewBox="0 0 1280 820" role="img" aria-labelledby="title desc">
+  <title id="title">NightOwl Timer 关于页面预览</title>
+  <desc id="desc">关于页面展示版本、运行平台、GitHub 仓库和本地数据入口。</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0e1428"/><stop offset="1" stop-color="#202b5d"/></linearGradient></defs>
+  <rect width="1280" height="820" rx="28" fill="url(#bg)"/>
+  <g font-family="Segoe UI, Microsoft YaHei, sans-serif" fill="#f4f5ff">
+    <text x="62" y="70" font-size="18" fill="#aeb8df">‹</text><text x="92" y="70" font-size="15">返回设置</text>
+    <rect x="260" y="82" width="760" height="650" rx="24" fill="#171e37" stroke="#3a4777"/>
+    <circle cx="640" cy="170" r="48" fill="#292e5b"/><path d="M640 136a34 34 0 1 0 23 58l-9-13a19 19 0 1 1 4-28z" fill="#c9b8ff"/>
+    <text x="640" y="260" text-anchor="middle" font-size="30" font-weight="700">NightOwl Timer</text><text x="640" y="290" text-anchor="middle" font-size="15" fill="#a9b4df">陪你把电脑安静地交给夜晚。</text>
+    <g font-size="15"><text x="316" y="350" fill="#9ca8d0">版本</text><text x="720" y="350" font-weight="700">v1.0.1</text><rect x="816" y="326" width="142" height="38" rx="10" fill="#6f68e8"/><text x="887" y="350" text-anchor="middle">检查更新</text>
+      <text x="316" y="414" fill="#9ca8d0">运行平台</text><text x="720" y="414" font-weight="700">Windows x64</text>
+      <text x="316" y="478" fill="#9ca8d0">代码仓库</text><text x="720" y="478" fill="#bdb4ff">github.com/Zverly/NightOwlTimer ↗</text>
+      <text x="316" y="542" fill="#9ca8d0">开源协议</text><text x="720" y="542" font-weight="700">MIT License · © 2026 Zverly</text>
+      <text x="316" y="606" fill="#9ca8d0">本地数据</text><text x="720" y="606" fill="#bdb4ff">打开应用目录下的 data 文件夹 ↗</text></g>
+    <path d="M316 376h642M316 440h642M316 504h642M316 568h642" stroke="#303b67"/>
+    <text x="62" y="780" font-size="13" fill="#8d9ad0">NightOwl Timer · 本地运行，不上传任务数据</text>
+  </g>
+</svg>
