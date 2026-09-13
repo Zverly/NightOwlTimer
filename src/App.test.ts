@@ -10,6 +10,9 @@ const { invokeMock, listenMock, openUrlMock } = vi.hoisted(() => ({
 
 vi.mock('@tauri-apps/api/core', () => ({ invoke: invokeMock }));
 vi.mock('@tauri-apps/api/event', () => ({ listen: listenMock }));
+vi.mock('@tauri-apps/api/window', () => ({
+  getCurrentWindow: () => ({ startDragging: vi.fn(async () => undefined) }),
+}));
 vi.mock('@tauri-apps/plugin-opener', () => ({ openUrl: openUrlMock }));
 vi.mock('/nightowl-icon.png', () => ({ default: '' }));
 
@@ -60,6 +63,7 @@ describe('App', () => {
     expect(wrapper.get('button[aria-label="最小化"]').attributes('title')).toBe('最小化');
     expect(wrapper.get('button[aria-label="退出"]').attributes('title')).toBe('退出');
     expect(wrapper.find('.window-actions').attributes('data-tauri-drag-region')).toBeUndefined();
+    await wrapper.get('.title-drag').trigger('pointerdown');
   });
 
   it('renders Lucide SVG icons and toggles action and 60-minute preset state', async () => {

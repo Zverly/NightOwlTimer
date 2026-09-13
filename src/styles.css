@@ -257,9 +257,13 @@ input:disabled {
   border-color: #b18bef;
 }
 .action-icon {
-  display: block;
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 9px;
-  font-size: 22px;
+  line-height: 0;
   color: #9da8ff;
 }
 .force .action-icon {
@@ -784,7 +788,14 @@ footer i {
 .icon-back svg,
 .about-entry svg,
 .history-refresh svg {
+  display: block;
   stroke: currentColor;
+}
+.repository-setting a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  line-height: 1.35;
 }
 .path,
 .about-entry small,

@@ -2,6 +2,7 @@
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch, type Component } from 'vue';
 import { invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 import { openUrl } from '@tauri-apps/plugin-opener';
 import {
   AlertTriangle,
@@ -264,10 +265,17 @@ async function openRepository() {
   try {
     await openUrl(repositoryUrl);
   } catch (error) {
-    notify(`打开仓库失败：${String(error)}`, 'error');
+    const fallback = window.open(repositoryUrl, '_blank', 'noopener,noreferrer');
+    if (!fallback) notify(`打开仓库失败：${String(error)}`, 'error');
   } finally {
     repositoryOpening.value = false;
   }
+}
+async function startWindowDrag(event: PointerEvent) {
+  if (event.button !== 0) return;
+  try {
+    await getCurrentWindow().startDragging();
+  } catch {}
 }
 async function copyRepositoryUrl() {
   if (repositoryCopying.value) return;
@@ -368,11 +376,11 @@ watch(
 <template>
   <main class="shell">
     <header class="topbar" data-tauri-drag-region>
-      <div class="brand" data-tauri-drag-region>
+      <div class="brand" data-tauri-drag-region @pointerdown="startWindowDrag">
         <span class="brand-mark"></span>
         <div><strong>NightOwl</strong><small>轻量定时助手</small></div>
       </div>
-      <div class="title-drag" data-tauri-drag-region></div>
+      <div class="title-drag" data-tauri-drag-region @pointerdown="startWindowDrag"></div>
       <div class="window-actions">
         <button type="button" title="最小化" aria-label="最小化" @click="minimizeWindow">
           <Minus :size="16" aria-hidden="true" /></button
