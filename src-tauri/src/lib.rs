@@ -82,7 +82,8 @@ fn get_diagnostics(app: tauri::AppHandle) -> Result<serde_json::Value, String> {
         "version": env!("CARGO_PKG_VERSION"),
         "platform": std::env::consts::OS,
         "history_count": data.history.len(),
-        "data_directory": storage::data_directory().display().to_string()
+        "data_directory": storage::data_directory().display().to_string(),
+        "data_file": storage::data_file_path().display().to_string()
     }))
 }
 

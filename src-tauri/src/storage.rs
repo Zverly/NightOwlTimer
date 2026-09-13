@@ -31,16 +31,17 @@ fn migrate_data_file(legacy_file: &Path, current_file: &Path) -> Result<(), Stri
 fn data_file() -> Result<PathBuf, String> {
     let directory = data_directory();
     fs::create_dir_all(&directory).map_err(|error| error.to_string())?;
-    let file = directory.join("nightowl-data.json");
+    let file = data_file_path();
     migrate_data_file(Path::new(LEGACY_DATA_FILE), &file)?;
     Ok(file)
 }
 
 pub fn data_directory() -> PathBuf {
-    resolve_data_directory(
-        std::env::var_os("APPDATA").map(PathBuf::from),
-        std::env::current_exe().ok(),
-    )
+    resolve_data_directory(None, std::env::current_exe().ok())
+}
+
+pub fn data_file_path() -> PathBuf {
+    data_directory().join("nightowl-data.json")
 }
 
 fn load_data() -> Result<AppData, String> {
@@ -100,16 +101,13 @@ mod tests {
     use std::{fs, path::PathBuf};
 
     #[test]
-    fn data_directory_prefers_windows_roaming_app_data() {
+    fn data_directory_uses_the_executable_directory() {
         let directory = resolve_data_directory(
-            Some(PathBuf::from(r"C:\Users\Test\AppData\Roaming")),
+            None,
             Some(PathBuf::from(r"D:\Apps\NightOwl\nightowl-timer.exe")),
         );
 
-        assert_eq!(
-            directory,
-            PathBuf::from(r"C:\Users\Test\AppData\Roaming\NightOwl Timer")
-        );
+        assert_eq!(directory, PathBuf::from(r"D:\Apps\NightOwl\data"));
     }
 
     #[test]

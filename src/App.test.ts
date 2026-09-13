@@ -2,10 +2,11 @@ import { flushPromises, mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { nextTick } from 'vue';
 
-const { invokeMock, listenMock, openUrlMock } = vi.hoisted(() => ({
+const { invokeMock, listenMock, openUrlMock, openPathMock } = vi.hoisted(() => ({
   invokeMock: vi.fn(),
   listenMock: vi.fn(async () => () => undefined),
   openUrlMock: vi.fn(async () => undefined),
+  openPathMock: vi.fn(async () => undefined),
 }));
 
 vi.mock('@tauri-apps/api/core', () => ({ invoke: invokeMock }));
@@ -13,7 +14,7 @@ vi.mock('@tauri-apps/api/event', () => ({ listen: listenMock }));
 vi.mock('@tauri-apps/api/window', () => ({
   getCurrentWindow: () => ({ startDragging: vi.fn(async () => undefined) }),
 }));
-vi.mock('@tauri-apps/plugin-opener', () => ({ openUrl: openUrlMock }));
+vi.mock('@tauri-apps/plugin-opener', () => ({ openUrl: openUrlMock, openPath: openPathMock }));
 vi.mock('/nightowl-icon.png', () => ({ default: '' }));
 
 function defaultInvoke(command: string) {
@@ -31,6 +32,7 @@ function defaultInvoke(command: string) {
       platform: 'Windows',
       history_count: 0,
       data_directory: 'E:/data',
+      data_file: 'E:/data/nightowl-data.json',
     });
   if (command === 'get_history') return Promise.resolve([]);
   return Promise.resolve(undefined);
@@ -49,6 +51,7 @@ describe('App', () => {
     invokeMock.mockImplementation(defaultInvoke);
     listenMock.mockClear();
     openUrlMock.mockClear();
+    openPathMock.mockClear();
     Object.defineProperty(navigator, 'clipboard', {
       configurable: true,
       value: { writeText: vi.fn(async () => undefined) },
@@ -90,11 +93,9 @@ describe('App', () => {
     await repository.trigger('click');
     await flushPromises();
     expect(openUrlMock).toHaveBeenCalledWith('https://github.com/Zverly/NightOwlTimer');
-    await wrapper.get('button.ghost-button').trigger('click');
+    await wrapper.get('.local-data-detail a').trigger('click');
     await flushPromises();
-    expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
-      'https://github.com/Zverly/NightOwlTimer',
-    );
+    expect(openPathMock).toHaveBeenCalledWith('E:/data/nightowl-data.json');
   });
 
   it('checks GitHub for the latest release', async () => {

@@ -3,12 +3,11 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch, type Compon
 import { invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { openUrl } from '@tauri-apps/plugin-opener';
+import { openPath, openUrl } from '@tauri-apps/plugin-opener';
 import {
   AlertTriangle,
   ArrowLeft,
   Clock3,
-  Copy,
   ExternalLink,
   Moon,
   Minus,
@@ -43,7 +42,6 @@ const appVersion = __APP_VERSION__;
 const history = ref<Array<{ time: string; action: string; detail: string }>>([]);
 const historyRefreshing = ref(false);
 const repositoryOpening = ref(false);
-const repositoryCopying = ref(false);
 const updateChecking = ref(false);
 const settings = ref<Settings>({
   reminders: { ten: true, one: true, thirty: true },
@@ -57,6 +55,7 @@ const diagnostics = ref({
   platform: '-',
   history_count: 0,
   data_directory: '-',
+  data_file: '-',
 });
 const now = ref(Date.now());
 const timer = window.setInterval(() => (now.value = Date.now()), 1000);
@@ -278,16 +277,11 @@ async function startWindowDrag(event: PointerEvent) {
     await getCurrentWindow().startDragging();
   } catch {}
 }
-async function copyRepositoryUrl() {
-  if (repositoryCopying.value) return;
-  repositoryCopying.value = true;
+async function openDataFile() {
   try {
-    await navigator.clipboard.writeText(repositoryUrl);
-    notify('仓库地址已复制', 'success');
+    await openPath(diagnostics.value.data_file);
   } catch (error) {
-    notify(`复制仓库地址失败：${String(error)}`, 'error');
-  } finally {
-    repositoryCopying.value = false;
+    notify(`打开数据文件失败：${String(error)}`, 'error');
   }
 }
 async function checkForUpdate() {
@@ -651,22 +645,13 @@ watch(
               <div class="about-detail">
                 <span>开源协议</span><strong>MIT License · © 2026 Zverly</strong>
               </div>
-              <div class="about-detail">
-                <span>本地数据</span><strong>{{ diagnostics.history_count }} 条历史记录</strong>
+              <div class="about-detail local-data-detail">
+                <span>本地数据</span>
+                <a href="#" aria-label="打开本地数据文件" @click.prevent="openDataFile">
+                  {{ diagnostics.history_count }} 条历史记录 · {{ diagnostics.data_file }}
+                  <ExternalLink :size="14" aria-hidden="true" />
+                </a>
               </div>
-            </div>
-            <div class="about-actions">
-              <button
-                type="button"
-                class="ghost-button"
-                aria-label="复制仓库地址"
-                :disabled="repositoryCopying"
-                @click="copyRepositoryUrl"
-              >
-                <Copy :size="14" aria-hidden="true" />{{
-                  repositoryCopying ? '复制中…' : '复制仓库地址'
-                }}
-              </button>
             </div>
           </section>
         </section>
