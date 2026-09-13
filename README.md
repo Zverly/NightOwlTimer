@@ -11,13 +11,13 @@
 
 ## 界面预览
 
-主界面提供关机、强制关机和睡眠三种动作，并支持快捷倒计时和精确时间：
+界面预览（来自 `1.0.1` 实际运行版本）：
 
-![NightOwl Timer 主界面](docs/images/nightowl-main.png)
+![NightOwl Timer 主界面](docs/images/QQ20260914-000247.png)
 
-关于页面集中展示版本、运行平台、GitHub 仓库和本地数据入口：
+![NightOwl Timer 计划进行中](docs/images/QQ20260914-000300.png)
 
-![NightOwl Timer 关于页面](docs/images/nightowl-about.png)
+![NightOwl Timer 关于页面](docs/images/QQ20260914-000309.png)
 
 ## 下载
 
