@@ -588,6 +588,132 @@ input:disabled {
     serif;
   box-shadow: 0 0 20px #9488ed66;
 }
+.about-layout {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  height: calc(100% - 34px);
+  min-height: 0;
+  gap: 14px;
+}
+.about-nav {
+  padding: 18px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: #11162a;
+}
+.about-nav-brand,
+.about-nav-status,
+.about-nav-items span {
+  display: flex;
+  align-items: center;
+}
+.about-nav-brand {
+  gap: 8px;
+  padding: 0 4px 18px;
+}
+.about-nav-brand .brand-mark {
+  width: 27px;
+  height: 27px;
+  border-radius: 8px;
+}
+.about-nav-brand strong {
+  font-size: 14px;
+}
+.about-nav-status {
+  gap: 8px;
+  padding: 11px 10px;
+  border: 1px solid #343b60;
+  border-radius: 10px;
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+.about-nav-status i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 8px var(--success);
+}
+.about-nav-status small {
+  margin-left: auto;
+  color: var(--success);
+  font-size: 10px;
+}
+.about-nav-items {
+  display: grid;
+  gap: 5px;
+  margin-top: 15px;
+}
+.about-nav-items span {
+  gap: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+.about-nav-items span.active {
+  background: #292d48;
+  color: var(--text);
+}
+.about-panel {
+  overflow: auto;
+  padding: 30px 38px;
+}
+.about-hero {
+  padding: 12px 0 26px;
+  border-bottom: 1px solid #293152;
+  text-align: center;
+}
+.about-hero .about-mark {
+  margin: 0 auto 14px;
+}
+.about-hero h1 {
+  margin: 0;
+  font-size: 27px;
+  letter-spacing: -0.5px;
+}
+.about-hero p {
+  margin: 8px 0 0;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+.about-details {
+  margin-top: 12px;
+}
+.about-detail {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 52px;
+  padding: 10px 0;
+  border-bottom: 1px solid #293152;
+}
+.about-detail > span {
+  flex: 0 0 92px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+.about-detail > strong {
+  margin-left: auto;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 500;
+  text-align: right;
+}
+.about-detail a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  color: #e49470;
+  font-size: 12px;
+  text-align: right;
+}
+.about-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 16px;
+}
 .path {
   max-width: 330px;
   overflow: hidden;

@@ -581,54 +581,65 @@ watch(
         <button type="button" class="icon-back" @click="page = 'settings'">
           <ArrowLeft :size="16" aria-hidden="true" /><span>返回设置</span>
         </button>
-        <section class="panel about-panel">
-          <header><strong>关于 NightOwl</strong><small>轻量化 Windows 定时助手</small></header>
-          <div class="about-mark">
-            <img src="/nightowl-icon.png" alt="NightOwl 应用图标" />
-          </div>
-          <div class="setting">
-            <div>
-              <strong>应用版本</strong><small>{{ diagnostics.version }}</small>
+        <section class="about-layout">
+          <aside class="about-nav" aria-label="关于页面导航">
+            <div class="about-nav-brand">
+              <span class="brand-mark"></span><strong>NightOwl</strong>
             </div>
-          </div>
-          <div class="setting">
-            <div>
-              <strong>运行平台</strong><small>{{ diagnostics.platform }}</small>
+            <div class="about-nav-status">
+              <i></i><span>NightOwl Timer</span><small>运行正常</small>
             </div>
-          </div>
-          <div class="setting">
-            <div>
-              <strong>历史记录</strong><small>{{ diagnostics.history_count }} 条</small>
+            <div class="about-nav-items">
+              <span><Settings :size="17" aria-hidden="true" />通用</span>
+              <span><Clock3 :size="17" aria-hidden="true" />定时任务</span>
+              <span class="active"><AlertTriangle :size="17" aria-hidden="true" />关于</span>
             </div>
-          </div>
-          <div class="setting">
-            <div>
-              <strong>数据目录</strong><small class="path">{{ diagnostics.data_directory }}</small>
+          </aside>
+          <section class="panel about-panel">
+            <div class="about-hero">
+              <div class="about-mark"><img src="/nightowl-icon.png" alt="NightOwl 应用图标" /></div>
+              <h1>NightOwl Timer</h1>
+              <p>陪你把电脑安静地交给夜晚。</p>
             </div>
-          </div>
-          <div class="setting repository-setting">
-            <div>
-              <strong>项目仓库</strong>
-              <a
-                :href="repositoryUrl"
-                :aria-busy="repositoryOpening"
-                aria-label="打开 NightOwl GitHub 仓库"
-                @click.prevent="openRepository"
+            <div class="about-details">
+              <div class="about-detail">
+                <span>版本</span><strong>v{{ diagnostics.version }}</strong>
+              </div>
+              <div class="about-detail">
+                <span>运行平台</span><strong>{{ diagnostics.platform }}</strong>
+              </div>
+              <div class="about-detail repository-setting">
+                <span>代码仓库</span>
+                <a
+                  :href="repositoryUrl"
+                  :aria-busy="repositoryOpening"
+                  aria-label="打开 NightOwl GitHub 仓库"
+                  @click.prevent="openRepository"
+                >
+                  {{ repositoryUrl }} <ExternalLink :size="14" aria-hidden="true" />
+                </a>
+              </div>
+              <div class="about-detail">
+                <span>开源协议</span><strong>MIT License · © 2026 Zverly</strong>
+              </div>
+              <div class="about-detail">
+                <span>本地数据</span><strong>{{ diagnostics.history_count }} 条历史记录</strong>
+              </div>
+            </div>
+            <div class="about-actions">
+              <button
+                type="button"
+                class="ghost-button"
+                aria-label="复制仓库地址"
+                :disabled="repositoryCopying"
+                @click="copyRepositoryUrl"
               >
-                <ExternalLink :size="14" aria-hidden="true" />{{ repositoryUrl }}
-              </a>
+                <Copy :size="14" aria-hidden="true" />{{
+                  repositoryCopying ? '复制中…' : '复制仓库地址'
+                }}
+              </button>
             </div>
-            <button
-              type="button"
-              class="ghost-button"
-              aria-label="复制仓库地址"
-              :disabled="repositoryCopying"
-              @click="copyRepositoryUrl"
-            >
-              <Copy :size="14" aria-hidden="true" />
-              {{ repositoryCopying ? '复制中…' : '复制地址' }}
-            </button>
-          </div>
+          </section>
         </section>
       </section>
     </section>
