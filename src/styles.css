@@ -161,6 +161,10 @@ input:disabled {
 }
 .page-entry,
 .ghost-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   border: 1px solid #3d4772;
   border-radius: 9px;
   background: #171e38;
@@ -785,6 +789,7 @@ footer i {
   accent-color: var(--primary);
 }
 .action-icon svg,
+.page-entry svg,
 .icon-back svg,
 .about-entry svg,
 .history-refresh svg {
