@@ -43,5 +43,7 @@ $main = [Drawing.Bitmap]::new((Resolve-Path $mainPath).Path)
 $mainGraphics = [Drawing.Graphics]::FromImage($main)
 $mainGraphics.FillRectangle([Drawing.SolidBrush]::new([Drawing.Color]::FromArgb(14, 20, 40)), 804, $main.Height - 30, 145, 28)
 $mainGraphics.DrawString('v1.0.1 · 本地运行', [Drawing.Font]::new('Microsoft YaHei UI', 11), [Drawing.SolidBrush]::new([Drawing.Color]::FromArgb(141, 154, 208)), 840, $main.Height - 25)
-$main.Save((Resolve-Path $mainPath), [Drawing.Imaging.ImageFormat]::Png)
+$mainTemp = "$mainPath.tmp.png"
+$main.Save($mainTemp, [Drawing.Imaging.ImageFormat]::Png)
 $mainGraphics.Dispose(); $main.Dispose()
+Move-Item -Force $mainTemp $mainPath
