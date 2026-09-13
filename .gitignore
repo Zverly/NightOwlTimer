@@ -5,6 +5,7 @@ dist/
 
 # Rust and Tauri
 target/
+.cargo-target*/
 src-tauri/target/
 src-tauri/gen/
 audit-target/
