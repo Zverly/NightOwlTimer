@@ -115,9 +115,8 @@ fn open_repository() -> Result<(), String> {
 
 #[tauri::command]
 fn open_data_file() -> Result<(), String> {
-    let path = storage::data_file_path();
     std::process::Command::new("explorer.exe")
-        .arg(format!("/select,\"{}\"", path.display()))
+        .arg(storage::data_directory())
         .spawn()
         .map(|_| ())
         .map_err(|error| error.to_string())
